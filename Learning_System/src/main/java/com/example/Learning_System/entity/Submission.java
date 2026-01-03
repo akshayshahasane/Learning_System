@@ -11,20 +11,21 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Assignment {
+public class Submission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String fileUrl; // or just filename
 
-    @Column(length = 2000)
-    private String description;
-
-    private LocalDate dueDate;
+    private LocalDate submittedAt;
 
     @ManyToOne
-    private Course course;
-}
+    private Assignment assignment;
 
+    @ManyToOne
+    private User student;
+
+    private Integer grade; // optional
+}
