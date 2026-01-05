@@ -27,5 +27,12 @@ public class Submission {
     @ManyToOne
     private User student;
 
-    private Integer grade; // optional
+    private Integer grade;
+
+    private String submissionFile;
+
+    @Column(length = 2000)
+    private String feedback;
+
+
 }

@@ -22,4 +22,7 @@ public class Lesson {
 
     @ManyToOne
     private Course course;
+
+    private String fileName;   // store uploaded file name
+
 }
