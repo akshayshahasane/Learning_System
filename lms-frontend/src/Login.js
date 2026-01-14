@@ -24,6 +24,11 @@ function Login() {
 
             setMessage("Login success");
 
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("role", response.data.role);
+            navigate("/dashboard");
+
+
             // save token
             localStorage.setItem("token", response.data.token);
 
@@ -36,33 +41,37 @@ function Login() {
     };
 
     return (
-        <div>
-            <h2>Login</h2>
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <div className="bg-white p-6 rounded-lg shadow-md w-96">
+                <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
 
-            <form onSubmit={handleLogin}>
+                <form onSubmit={handleLogin} className="space-y-3">
+                    <input
+                        className="w-full border p-2 rounded"
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e)=>setEmail(e.target.value)}
+                    />
 
-                <input
-                    type="email"
-                    placeholder="Enter email"
-                    value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
-                /><br/>
+                    <input
+                        className="w-full border p-2 rounded"
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
+                    />
 
-                <input
-                    type="password"
-                    placeholder="Enter password"
-                    value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
-                /><br/>
+                    <button className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+                        Login
+                    </button>
+                </form>
 
-                <button type="submit">Login</button>
-            </form>
-
-            <p>{message}</p>
-            <p>Don't have an account? <Link to="/register">Register</Link></p>
-
+                <p className="text-center text-red-500 mt-2">{message}</p>
+            </div>
         </div>
     );
+
 }
 
 export default Login;

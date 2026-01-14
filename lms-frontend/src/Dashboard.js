@@ -1,36 +1,41 @@
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-
-
+import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard() {
 
     const navigate = useNavigate();
-
-    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
+        localStorage.clear();
         navigate("/login");
     };
 
     return (
-        <div>
-            <h2>Student Dashboard</h2>
+        <div className="min-h-screen bg-gray-100 p-6">
+            <div className="max-w-xl mx-auto bg-white p-6 rounded shadow">
+                <h2 className="text-xl font-bold mb-4">Dashboard</h2>
+                <p className="mb-4">Role: {role}</p>
 
-            <p>You are logged in ✔️</p>
+                <div className="flex gap-3 flex-wrap">
+                    {role === "STUDENT" && (
+                        <>
+                            <Link to="/courses" className="btn">Courses</Link>
+                            <Link to="/my-courses" className="btn">My Courses</Link>
+                        </>
+                    )}
 
-            <button onClick={handleLogout}>Logout</button>
+                    {role === "ADMIN" && (
+                        <Link to="/add-course" className="btn">Add Course</Link>
+                    )}
+                </div>
 
-            {/*<p><b>Your JWT:</b></p>*/}
-            {/*<small>{token}</small>*/}
-
-            <Link to="/courses">
-                <button>View Courses</button>
-            </Link>
-
-
-
+                <button
+                    onClick={handleLogout}
+                    className="mt-6 bg-red-500 text-white px-4 py-2 rounded"
+                >
+                    Logout
+                </button>
+            </div>
         </div>
     );
 

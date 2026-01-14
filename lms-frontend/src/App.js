@@ -3,6 +3,10 @@ import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Register from "./Register";
 import Courses from "./Courses";
+import AddCourse from "./AddCourse";
+import MyCourses from "./MyCourses";
+
+
 
 
 
@@ -30,8 +34,26 @@ function App() {
                 element={ token ? <Courses /> : <Navigate to="/login" /> }
             />
 
+            <Route
+                path="/add-course"
+                element={
+                    token && localStorage.getItem("role") === "ADMIN"
+                        ? <AddCourse />
+                        : <Navigate to="/dashboard" />
+                }
+            />
+
+            <Route
+                path="/my-courses"
+                element={ token ? <MyCourses /> : <Navigate to="/login" /> }
+            />
+
+
+
 
         </Routes>
+
+
 
 
     );
