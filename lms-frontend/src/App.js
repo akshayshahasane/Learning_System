@@ -1,6 +1,10 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
+import Register from "./Register";
+import Courses from "./Courses";
+
+
 
 function App() {
 
@@ -19,8 +23,17 @@ function App() {
                 path="/dashboard"
                 element={ token ? <Dashboard /> : <Navigate to="/login" /> }
             />
+            <Route path="/register" element={<Register />} />
+
+            <Route
+                path="/courses"
+                element={ token ? <Courses /> : <Navigate to="/login" /> }
+            />
+
 
         </Routes>
+
+
     );
 }
 
